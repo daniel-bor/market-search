@@ -20,6 +20,9 @@ interface DataContextType {
     searchText: string;
   };
   setFilters: (filters: { category?: string; distance?: number; searchText?: string }) => void;
+  filterBusinesses: (businessList: Business[]) => Business[];
+  clearFilters: () => void;
+  getAvailableCategories: () => string[];
   selectBusiness: (id: string) => void;
   getBusinessById: (id: string) => Business | undefined;
   addVisit: (businessId: string) => void;
@@ -83,9 +86,22 @@ export function DataProvider({ children }: DataProviderProps) {
     }
   }, []);
 
-  // Filtrar negocios basado en los filtros actuales
-  useEffect(() => {
-    let filtered = [...businesses];
+  // Función para calcular distancia entre dos puntos (fórmula haversine simplificada)
+  const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: number): number => {
+    const R = 6371; // Radio de la Tierra en km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+      Math.sin(dLng/2) * Math.sin(dLng/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c; // Distancia en km
+  };
+
+  // Función principal de filtrado
+  const filterBusinesses = React.useCallback((businessList: Business[]) => {
+    let filtered = [...businessList];
 
     // Filtro por categoría
     if (filters.category && filters.category !== '') {
@@ -95,20 +111,53 @@ export function DataProvider({ children }: DataProviderProps) {
     }
 
     // Filtro por texto de búsqueda
-    if (filters.searchText) {
-      const searchLower = filters.searchText.toLowerCase();
+    if (filters.searchText && filters.searchText.trim() !== '') {
+      const searchLower = filters.searchText.toLowerCase().trim();
       filtered = filtered.filter(business =>
         business.name.toLowerCase().includes(searchLower) ||
         business.description.toLowerCase().includes(searchLower) ||
-        business.category.toLowerCase().includes(searchLower)
+        business.category.toLowerCase().includes(searchLower) ||
+        business.address.toLowerCase().includes(searchLower)
       );
     }
 
-    // Filtro por distancia (simulado - para el prototipo usamos todas)
-    // En una app real, aquí se calcularía la distancia real basada en coordenadas
+    // Filtro por distancia (usando coordenadas simuladas)
+    // Ubicación central de referencia (puede ser la ubicación del usuario)
+    const userLocation = [4.7110, -74.0721]; // Bogotá centro como referencia
     
+    if (filters.distance > 0) {
+      filtered = filtered.filter(business => {
+        const distance = calculateDistance(
+          userLocation[0], userLocation[1], 
+          business.coords[0], business.coords[1]
+        );
+        return distance <= filters.distance;
+      });
+    }
+
+    return filtered;
+  }, [filters]);
+
+  // Aplicar filtros cuando cambien los negocios o los filtros
+  useEffect(() => {
+    const filtered = filterBusinesses(businesses);
     setFilteredBusinesses(filtered);
-  }, [businesses, filters]);
+  }, [businesses, filterBusinesses]);
+
+  // Limpiar todos los filtros
+  const clearFilters = () => {
+    setFiltersState({
+      category: '',
+      distance: 50,
+      searchText: ''
+    });
+  };
+
+  // Obtener categorías disponibles de los negocios
+  const getAvailableCategories = (): string[] => {
+    const categories = businesses.map(business => business.category);
+    return [...new Set(categories)].sort();
+  };
 
   // Establecer filtros y aplicarlos
   const setFilters = (newFilters: { category?: string; distance?: number; searchText?: string }) => {
@@ -182,6 +231,9 @@ export function DataProvider({ children }: DataProviderProps) {
     loading,
     filters,
     setFilters,
+    filterBusinesses,
+    clearFilters,
+    getAvailableCategories,
     selectBusiness,
     getBusinessById,
     addVisit,
