@@ -1,0 +1,246 @@
+[
+  {
+    "id": "1",
+    "name": "Café Central",
+    "category": "Café/Restaurante",
+    "description": "Un acogedor café en el centro de la ciudad que sirve café de especialidad, pasteles caseros y comidas ligeras. Ambiente perfecto para trabajar o reunirse con amigos.",
+    "address": "Calle Principal 123, Centro",
+    "phone": "+57 300 123 4567",
+    "email": "info@cafecentral.com",
+    "website": "https://cafecentral.com",
+    "coords": [4.7110, -74.0721],
+    "images": [
+      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400",
+      "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400",
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400"
+    ],
+    "rating": 4.5,
+    "hours": {
+      "monday": "7:00-20:00",
+      "tuesday": "7:00-20:00",
+      "wednesday": "7:00-20:00",
+      "thursday": "7:00-20:00",
+      "friday": "7:00-22:00",
+      "saturday": "8:00-22:00",
+      "sunday": "8:00-18:00"
+    },
+    "featured": true
+  },
+  {
+    "id": "2",
+    "name": "Librería El Saber",
+    "category": "Librería",
+    "description": "Librería independiente con una amplia selección de libros, revistas y material de oficina. También ofrecemos eventos literarios y talleres de lectura.",
+    "address": "Carrera 15 #45-67, Zona Rosa",
+    "phone": "+57 301 987 6543",
+    "email": "contacto@libreriasaber.com",
+    "coords": [4.7150, -74.0680],
+    "images": [
+      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400"
+    ],
+    "rating": 4.2,
+    "hours": {
+      "monday": "9:00-19:00",
+      "tuesday": "9:00-19:00",
+      "wednesday": "9:00-19:00",
+      "thursday": "9:00-19:00",
+      "friday": "9:00-19:00",
+      "saturday": "9:00-17:00",
+      "sunday": "Cerrado"
+    }
+  },
+  {
+    "id": "3",
+    "name": "Boutique Moda",
+    "category": "Ropa/Moda",
+    "description": "Boutique de moda femenina con las últimas tendencias. Ofrecemos ropa de diseñadores locales e internacionales, accesorios y asesoría de imagen.",
+    "address": "Avenida 19 #102-35, Zona Norte",
+    "phone": "+57 302 456 7890",
+    "email": "ventas@boutiquemoda.com",
+    "website": "https://boutiquemoda.com",
+    "coords": [4.7200, -74.0650],
+    "images": [
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
+    ],
+    "rating": 4.7,
+    "hours": {
+      "monday": "10:00-20:00",
+      "tuesday": "10:00-20:00",
+      "wednesday": "10:00-20:00",
+      "thursday": "10:00-20:00",
+      "friday": "10:00-21:00",
+      "saturday": "10:00-21:00",
+      "sunday": "11:00-18:00"
+    },
+    "featured": true
+  },
+  {
+    "id": "4",
+    "name": "Farmacia San Juan",
+    "category": "Farmacia/Salud",
+    "description": "Farmacia de barrio con servicio personalizado. Contamos con medicamentos, productos de cuidado personal y servicio de aplicación de inyecciones.",
+    "address": "Calle 72 #11-45, Chapinero",
+    "phone": "+57 303 789 0123",
+    "email": "farmacia@sanjuan.com",
+    "coords": [4.7080, -74.0750],
+    "images": [
+      "https://images.unsplash.com/photo-1576671081837-49000212a370?w=400"
+    ],
+    "rating": 4.3,
+    "hours": {
+      "monday": "8:00-20:00",
+      "tuesday": "8:00-20:00",
+      "wednesday": "8:00-20:00",
+      "thursday": "8:00-20:00",
+      "friday": "8:00-20:00",
+      "saturday": "8:00-18:00",
+      "sunday": "9:00-15:00"
+    }
+  },
+  {
+    "id": "5",
+    "name": "Tech Repair Pro",
+    "category": "Tecnología",
+    "description": "Servicio técnico especializado en reparación de smartphones, tablets y computadores. Diagnóstico gratuito y garantía en todas las reparaciones.",
+    "address": "Carrera 7 #32-18, La Candelaria",
+    "phone": "+57 304 567 8901",
+    "email": "soporte@techrepair.com",
+    "coords": [4.7000, -74.0780],
+    "images": [
+      "https://images.unsplash.com/photo-1581092795442-6ad2d6e6161a?w=400",
+      "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400"
+    ],
+    "rating": 4.6,
+    "hours": {
+      "monday": "9:00-18:00",
+      "tuesday": "9:00-18:00",
+      "wednesday": "9:00-18:00",
+      "thursday": "9:00-18:00",
+      "friday": "9:00-18:00",
+      "saturday": "9:00-16:00",
+      "sunday": "Cerrado"
+    }
+  },
+  {
+    "id": "6",
+    "name": "Panadería El Trigo",
+    "category": "Panadería",
+    "description": "Panadería artesanal con más de 20 años de tradición. Pan fresco todos los días, pasteles personalizados y productos de repostería.",
+    "address": "Calle 63 #9-23, Chapinero",
+    "phone": "+57 305 234 5678",
+    "email": "pedidos@panaderiatrigo.com",
+    "coords": [4.7130, -74.0700],
+    "images": [
+      "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400",
+      "https://images.unsplash.com/photo-1555507036-ab794f8abb54?w=400"
+    ],
+    "rating": 4.4,
+    "hours": {
+      "monday": "6:00-19:00",
+      "tuesday": "6:00-19:00",
+      "wednesday": "6:00-19:00",
+      "thursday": "6:00-19:00",
+      "friday": "6:00-19:00",
+      "saturday": "6:00-20:00",
+      "sunday": "7:00-17:00"
+    }
+  },
+  {
+    "id": "7",
+    "name": "Gimnasio FitZone",
+    "category": "Deportes/Fitness",
+    "description": "Gimnasio moderno con equipos de última tecnología, clases grupales, entrenadores personales y zona de crossfit. Ambiente motivador para alcanzar tus metas.",
+    "address": "Avenida 68 #15-30, Zona Industrial",
+    "phone": "+57 306 345 6789",
+    "email": "info@fitzone.com",
+    "website": "https://fitzone.com",
+    "coords": [4.7170, -74.0600],
+    "images": [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400",
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400"
+    ],
+    "rating": 4.8,
+    "hours": {
+      "monday": "5:00-22:00",
+      "tuesday": "5:00-22:00",
+      "wednesday": "5:00-22:00",
+      "thursday": "5:00-22:00",
+      "friday": "5:00-22:00",
+      "saturday": "6:00-20:00",
+      "sunday": "7:00-18:00"
+    },
+    "featured": true
+  },
+  {
+    "id": "8",
+    "name": "Restaurante Luna",
+    "category": "Café/Restaurante",
+    "description": "Restaurante de cocina mediterránea con ambiente romántico. Especialidad en pastas, pizzas artesanales y una extensa carta de vinos.",
+    "address": "Carrera 11 #93-45, Zona Rosa",
+    "phone": "+57 307 456 7890",
+    "email": "reservas@restauranteluna.com",
+    "coords": [4.7190, -74.0640],
+    "images": [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400",
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400"
+    ],
+    "rating": 4.5,
+    "hours": {
+      "monday": "12:00-23:00",
+      "tuesday": "12:00-23:00",
+      "wednesday": "12:00-23:00",
+      "thursday": "12:00-23:00",
+      "friday": "12:00-24:00",
+      "saturday": "12:00-24:00",
+      "sunday": "12:00-22:00"
+    }
+  },
+  {
+    "id": "9",
+    "name": "Peluquería Style",
+    "category": "Belleza/Estética",
+    "description": "Salón de belleza unisex con servicios de corte, peinado, coloración, manicure y pedicure. Productos profesionales y atención personalizada.",
+    "address": "Calle 85 #12-67, Chapinero Norte",
+    "phone": "+57 308 567 8901",
+    "email": "citas@peluqueriastyle.com",
+    "coords": [4.7160, -74.0670],
+    "images": [
+      "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400"
+    ],
+    "rating": 4.1,
+    "hours": {
+      "monday": "9:00-18:00",
+      "tuesday": "9:00-18:00",
+      "wednesday": "9:00-18:00",
+      "thursday": "9:00-18:00",
+      "friday": "9:00-19:00",
+      "saturday": "8:00-17:00",
+      "sunday": "Cerrado"
+    }
+  },
+  {
+    "id": "10",
+    "name": "Ferretería Central",
+    "category": "Ferretería/Hogar",
+    "description": "Ferretería completa con herramientas, materiales de construcción, pinturas y artículos para el hogar. Asesoría especializada para proyectos.",
+    "address": "Carrera 30 #25-40, Centro",
+    "phone": "+57 309 678 9012",
+    "email": "ventas@ferreteriacentral.com",
+    "coords": [4.7050, -74.0800],
+    "images": [
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400"
+    ],
+    "rating": 4.0,
+    "hours": {
+      "monday": "7:00-18:00",
+      "tuesday": "7:00-18:00",
+      "wednesday": "7:00-18:00",
+      "thursday": "7:00-18:00",
+      "friday": "7:00-18:00",
+      "saturday": "7:00-16:00",
+      "sunday": "8:00-14:00"
+    }
+  }
+]
