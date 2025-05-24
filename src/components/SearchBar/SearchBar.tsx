@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Search, MapPin, Filter } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
+import { useDebounce } from '@/hooks/useDebounce';
 
 interface SearchFilters {
   searchText: string;
@@ -48,29 +49,38 @@ export default function SearchBar({ onSearch, className = '' }: SearchBarProps) 
   });
 
   const [showFilters, setShowFilters] = useState(false);
+  
+  // Referencia para el callback para evitar re-renders innecesarios
+  const onSearchRef = useRef(onSearch);
+  onSearchRef.current = onSearch;
+  
+  // Debounce para la búsqueda de texto para evitar llamadas excesivas
+  const debouncedSearchText = useDebounce(filters.searchText, 300);
+
+  // Efecto para disparar la búsqueda cuando cambien los filtros
+  useEffect(() => {
+    const newFilters = { 
+      searchText: debouncedSearchText,
+      category: filters.category,
+      distance: filters.distance 
+    };
+    onSearchRef.current?.(newFilters);
+  }, [debouncedSearchText, filters.category, filters.distance]);
 
   const handleSearchChange = (value: string) => {
-    const newFilters = { ...filters, searchText: value };
-    setFilters(newFilters);
-    onSearch?.(newFilters);
+    setFilters(prev => ({ ...prev, searchText: value }));
   };
 
   const handleCategoryChange = (value: string) => {
-    const newFilters = { ...filters, category: value };
-    setFilters(newFilters);
-    onSearch?.(newFilters);
+    setFilters(prev => ({ ...prev, category: value }));
   };
 
   const handleDistanceChange = (value: string) => {
-    const newFilters = { ...filters, distance: parseInt(value) };
-    setFilters(newFilters);
-    onSearch?.(newFilters);
+    setFilters(prev => ({ ...prev, distance: parseInt(value) }));
   };
 
   const clearFilters = () => {
-    const newFilters = { searchText: '', category: 'Todas', distance: 5 };
-    setFilters(newFilters);
-    onSearch?.(newFilters);
+    setFilters({ searchText: '', category: 'Todas', distance: 5 });
   };
 
   return (

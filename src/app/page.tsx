@@ -7,7 +7,7 @@ import SearchBar, { SearchFilters } from "@/components/SearchBar/SearchBar";
 import { useData } from "@/contexts";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Map, List } from "lucide-react";
 
 // Importar MapView dinámicamente para evitar problemas de SSR
@@ -36,13 +36,13 @@ export default function Home() {
     router.push(`/business/${businessId}`);
   };
 
-  const handleSearchFilters = (searchFilters: SearchFilters) => {
+  const handleSearchFilters = useCallback((searchFilters: SearchFilters) => {
     setFilters({
       searchText: searchFilters.searchText,
       category: searchFilters.category === 'Todas' ? '' : searchFilters.category,
       distance: searchFilters.distance
     });
-  };
+  }, [setFilters]);
 
   if (loading) {
     return (
