@@ -8,7 +8,7 @@ import { BusinessCard } from "@/components/BusinessCard";
 import { useData } from "@/contexts";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Map, List } from "lucide-react";
 
 // Importar MapView dinámicamente para evitar problemas de SSR
@@ -29,16 +29,10 @@ export default function Home() {
     filteredBusinesses, 
     filters, 
     setFilters, 
-    loading, 
-    initMockData 
+    loading
   } = useData();
   const router = useRouter();
   const [viewMode, setViewMode] = useState<'map' | 'list'>('map');
-
-  // Inicializar datos mock si no están cargados
-  useEffect(() => {
-    initMockData();
-  }, [initMockData]);
 
   const handleBusinessClick = (businessId: string) => {
     router.push(`/business/${businessId}`);
@@ -181,22 +175,6 @@ export default function Home() {
               )}
             </div>
           </Card>
-        </div>
-
-        {/* Estado del desarrollo */}
-        <div className="text-center space-y-2">
-          <div className="inline-block bg-green-500 text-white px-4 py-2 rounded-lg mr-2">
-            ✅ Tarea 7.1 Completada
-          </div>
-          <div className="inline-block bg-green-500 text-white px-4 py-2 rounded-lg mr-2">
-            ✅ Tarea 7.2 Completada
-          </div>
-          <div className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg mr-2">
-            ✅ Toggle Mapa/Lista
-          </div>
-          <div className="inline-block bg-purple-500 text-white px-4 py-2 rounded-lg">
-            ✅ Vista de Lista Sincronizada
-          </div>
         </div>
       </div>
     </div>

@@ -52,23 +52,43 @@ export function DataProvider({ children }: DataProviderProps) {
 
   // Función para cargar datos mock
   const initMockData = React.useCallback(async () => {
+    console.log('🔄 Iniciando carga de datos mock...');
+    console.log('📍 Verificando si window está disponible:', typeof window !== 'undefined');
+    
+    if (typeof window === 'undefined') {
+      console.log('❌ Window no está disponible (SSR)');
+      setLoading(false);
+      return;
+    }
+    
     try {
       // Verificar si ya hay datos en localStorage
       const existingBusinesses = getFromStorage<Business[]>(STORAGE_KEYS.BUSINESSES);
+      console.log('📦 Negocios existentes en localStorage:', existingBusinesses?.length || 0);
       
       if (existingBusinesses && existingBusinesses.length > 0) {
+        console.log('✅ Usando datos existentes del localStorage');
         setBusinesses(existingBusinesses);
-        setFilteredBusinesses(existingBusinesses);
         setLoading(false);
         return;
       }
 
+      console.log('📥 Cargando datos desde archivo JSON...');
       // Cargar datos desde el archivo JSON mock
       const response = await fetch('/assets/mock-businesses.json');
+      console.log('🌐 Respuesta del fetch:', response.status, response.statusText);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const mockBusinesses: Business[] = await response.json();
+      console.log('📄 Datos JSON parseados:', mockBusinesses.length, 'negocios');
+      console.log('🔍 Primer negocio:', mockBusinesses[0]?.name);
       
       // Guardar en localStorage
       saveToStorage(STORAGE_KEYS.BUSINESSES, mockBusinesses);
+      console.log('💾 Datos guardados en localStorage');
       
       // Inicializar contadores de visitas y mensajes si no existen
       if (!getFromStorage(STORAGE_KEYS.VISITS)) {
@@ -79,10 +99,15 @@ export function DataProvider({ children }: DataProviderProps) {
       }
       
       setBusinesses(mockBusinesses);
-      setFilteredBusinesses(mockBusinesses);
+      console.log('🎯 Estado businesses actualizado con', mockBusinesses.length, 'negocios');
     } catch (error) {
-      console.error('Error loading mock data:', error);
+      console.error('❌ Error loading mock data:', error);
+      console.error('📊 Error details:', {
+        message: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined
+      });
     } finally {
+      console.log('🏁 Finalizando carga de datos, loading = false');
       setLoading(false);
     }
   }, []);
@@ -123,8 +148,8 @@ export function DataProvider({ children }: DataProviderProps) {
     }
 
     // Filtro por distancia (usando coordenadas simuladas)
-    // Ubicación central de referencia (puede ser la ubicación del usuario)
-    const userLocation = [4.7110, -74.0721]; // Bogotá centro como referencia
+    // Ubicación central de referencia (San Juan Sacatepéquez, Guatemala)
+    const userLocation = [14.7174, -90.6413]; // San Juan Sacatepéquez centro como referencia
     
     if (filters.distance > 0) {
       filtered = filtered.filter(business => {
@@ -265,8 +290,22 @@ export function DataProvider({ children }: DataProviderProps) {
 
   // Efectos
   useEffect(() => {
+    console.log('🚀 DataProvider montado, iniciando carga de datos...');
     initMockData();
   }, [initMockData]);
+
+  // Log adicional cuando cambie el estado de businesses
+  useEffect(() => {
+    console.log('🔄 Estado businesses actualizado:', businesses.length, 'negocios');
+    if (businesses.length > 0) {
+      console.log('📋 Lista de negocios:', businesses.map(b => b.name));
+    }
+  }, [businesses]);
+
+  // Log adicional cuando cambie el estado de loading
+  useEffect(() => {
+    console.log('⏳ Estado loading actualizado:', loading);
+  }, [loading]);
 
   const value: DataContextType = {
     businesses,
