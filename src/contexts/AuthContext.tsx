@@ -5,6 +5,7 @@ import {
   getFromStorage, 
   saveToStorage, 
   appendToStorageArray,
+  initMockData,
   STORAGE_KEYS,
   User,
   CurrentUser 
@@ -31,11 +32,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Cargar usuario actual al iniciar
   useEffect(() => {
-    const user = getFromStorage<CurrentUser>(STORAGE_KEYS.CURRENT_USER);
-    if (user) {
-      setCurrentUser(user);
-    }
-    setLoading(false);
+    const initializeAuth = async () => {
+      // Inicializar datos mock (incluye usuarios demo)
+      await initMockData();
+      
+      // Cargar usuario actual
+      const user = getFromStorage<CurrentUser>(STORAGE_KEYS.CURRENT_USER);
+      if (user) {
+        setCurrentUser(user);
+        // Restaurar cookie si existe el usuario
+        document.cookie = `buyloop_session=${user.token}; path=/; max-age=86400`;
+      }
+      setLoading(false);
+    };
+    
+    initializeAuth();
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
@@ -57,6 +68,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         // Guardar en localStorage y estado
         saveToStorage(STORAGE_KEYS.CURRENT_USER, currentUser);
         setCurrentUser(currentUser);
+        
+        // Crear cookie para el middleware
+        document.cookie = `buyloop_session=${currentUser.token}; path=/; max-age=86400`; // 24 horas
+        
         return true;
       }
       
@@ -97,6 +112,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       saveToStorage(STORAGE_KEYS.CURRENT_USER, currentUser);
       setCurrentUser(currentUser);
       
+      // Crear cookie para el middleware
+      document.cookie = `buyloop_session=${currentUser.token}; path=/; max-age=86400`; // 24 horas
+      
       return true;
     } catch (error) {
       console.error('Error during registration:', error);
@@ -108,6 +126,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // Limpiar sesión
     saveToStorage(STORAGE_KEYS.CURRENT_USER, null);
     setCurrentUser(null);
+    
+    // Limpiar cookie
+    document.cookie = 'buyloop_session=; path=/; max-age=0';
   };
 
   const value: AuthContextType = {

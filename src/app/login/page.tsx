@@ -17,8 +17,12 @@ export default function LoginPage() {
   }, [isAuthenticated, router]);
 
   const handleLoginSuccess = () => {
-    // Redirigir a la página principal después del login exitoso
-    router.push("/");
+    // Verificar si hay una URL de redirección en los parámetros
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectTo = urlParams.get('redirect') || '/';
+    
+    // Redirigir a la página solicitada o a la principal
+    router.push(redirectTo);
   };
 
   if (isAuthenticated) {
