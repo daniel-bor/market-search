@@ -116,7 +116,7 @@ export default function SearchBar({ onSearch, className = '' }: SearchBarProps) 
           <div className="mt-4 pt-4 border-t border-gray-200">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {/* Filtro por categoría */}
-              <div className="space-y-2">
+              <div className="space-y-2 z-30">
                 <label className="text-sm font-medium text-gray-700">
                   Categoría
                 </label>
