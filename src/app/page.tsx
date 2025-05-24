@@ -8,7 +8,8 @@ import { BusinessCard } from "@/components/BusinessCard";
 import { useData } from "@/contexts";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Map, List } from "lucide-react";
 
 // Importar MapView dinámicamente para evitar problemas de SSR
 const MapView = dynamic(() => import("@/components/MapView/MapView"), { 
@@ -32,6 +33,7 @@ export default function Home() {
     initMockData 
   } = useData();
   const router = useRouter();
+  const [viewMode, setViewMode] = useState<'map' | 'list'>('map');
 
   // Inicializar datos mock si no están cargados
   useEffect(() => {
@@ -110,50 +112,71 @@ export default function Home() {
           </Card>
         </div>
 
-        {/* Mapa principal */}
+        {/* Toggle de vista y resultados */}
         <div className="mb-8">
           <Card>
-            <CardHeader>
-              <CardTitle>Mapa de Negocios</CardTitle>
-              <CardDescription>
-                {filteredBusinesses.length} negocio{filteredBusinesses.length !== 1 ? 's' : ''} encontrado{filteredBusinesses.length !== 1 ? 's' : ''}
-              </CardDescription>
-            </CardHeader>
-            <div className="p-6">
-              <div className="h-96 w-full">
-                <MapView 
-                  businesses={filteredBusinesses}
-                  onBusinessClick={handleBusinessClick}
-                />
+            <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
+              <div>
+                <CardTitle>Negocios Encontrados</CardTitle>
+                <CardDescription>
+                  {filteredBusinesses.length} negocio{filteredBusinesses.length !== 1 ? 's' : ''} encontrado{filteredBusinesses.length !== 1 ? 's' : ''}
+                </CardDescription>
               </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* Lista de negocios - Demostración de BusinessCard */}
-        <div className="mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Lista de Negocios</CardTitle>
-              <CardDescription>
-                Vista en tarjetas de los negocios encontrados
-              </CardDescription>
+              <div className="flex space-x-2">
+                <Button
+                  variant={viewMode === 'map' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setViewMode('map')}
+                  className="flex items-center space-x-1"
+                >
+                  <Map className="h-4 w-4" />
+                  <span>Mapa</span>
+                </Button>
+                <Button
+                  variant={viewMode === 'list' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setViewMode('list')}
+                  className="flex items-center space-x-1"
+                >
+                  <List className="h-4 w-4" />
+                  <span>Lista</span>
+                </Button>
+              </div>
             </CardHeader>
             <div className="p-6">
-              {filteredBusinesses.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredBusinesses.slice(0, 6).map((business) => (
-                    <BusinessCard
-                      key={business.id}
-                      business={business}
-                      showDistance={true}
-                      distance={Math.random() * 5 + 0.5} // Distancia simulada entre 0.5km y 5.5km
-                    />
-                  ))}
+              {viewMode === 'map' ? (
+                <div className="h-96 w-full">
+                  <MapView 
+                    businesses={filteredBusinesses}
+                    onBusinessClick={handleBusinessClick}
+                  />
                 </div>
               ) : (
-                <div className="text-center py-8">
-                  <p className="text-gray-500">No se encontraron negocios con los filtros actuales.</p>
+                <div>
+                  {filteredBusinesses.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {filteredBusinesses.map((business) => (
+                        <BusinessCard
+                          key={business.id}
+                          business={business}
+                          showDistance={true}
+                          distance={Math.random() * 5 + 0.5} // Distancia simulada entre 0.5km y 5.5km
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-12">
+                      <div className="text-gray-400 mb-4">
+                        <List className="h-16 w-16 mx-auto" />
+                      </div>
+                      <h3 className="text-lg font-medium text-gray-900 mb-2">
+                        No se encontraron negocios
+                      </h3>
+                      <p className="text-gray-500">
+                        Intenta ajustar tus filtros de búsqueda
+                      </p>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -165,11 +188,14 @@ export default function Home() {
           <div className="inline-block bg-green-500 text-white px-4 py-2 rounded-lg mr-2">
             ✅ Tarea 7.1 Completada
           </div>
+          <div className="inline-block bg-green-500 text-white px-4 py-2 rounded-lg mr-2">
+            ✅ Tarea 7.2 Completada
+          </div>
           <div className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg mr-2">
-            ✅ BusinessCard Funcional
+            ✅ Toggle Mapa/Lista
           </div>
           <div className="inline-block bg-purple-500 text-white px-4 py-2 rounded-lg">
-            ✅ Vista de Lista
+            ✅ Vista de Lista Sincronizada
           </div>
         </div>
       </div>
