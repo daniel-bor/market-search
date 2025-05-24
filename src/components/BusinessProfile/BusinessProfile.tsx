@@ -39,7 +39,8 @@ export default function BusinessProfile({ business, onCall, onMessage }: Busines
   };
 
   const formatHours = (day: string) => {
-    const hours = business.hours[day.toLowerCase()];
+    const dayKey = getDayKey(day);
+    const hours = business.hours[dayKey];
     if (!hours || hours === 'Cerrado') {
       return 'Cerrado';
     }
@@ -49,6 +50,19 @@ export default function BusinessProfile({ business, onCall, onMessage }: Busines
   const getDaysOfWeek = () => [
     'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'
   ];
+
+  const getDayKey = (dayName: string): string => {
+    const dayMap: Record<string, string> = {
+      'Lunes': 'monday',
+      'Martes': 'tuesday', 
+      'Miércoles': 'wednesday',
+      'Jueves': 'thursday',
+      'Viernes': 'friday',
+      'Sábado': 'saturday',
+      'Domingo': 'sunday'
+    };
+    return dayMap[dayName] || dayName.toLowerCase();
+  };
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -221,7 +235,14 @@ export default function BusinessProfile({ business, onCall, onMessage }: Busines
           <div className="grid gap-2">
             {getDaysOfWeek().map((day) => {
               const hours = formatHours(day);
-              const isToday = new Date().getDay() === getDaysOfWeek().indexOf(day) + 1;
+              // Corregir la lógica para determinar el día actual
+              // getDay() devuelve 0=Domingo, 1=Lunes, ..., 6=Sábado
+              // getDaysOfWeek() tiene el array [Lunes, Martes, ..., Domingo]
+              const today = new Date().getDay();
+              const dayIndex = getDaysOfWeek().indexOf(day);
+              // Convertir: 0=Domingo -> 6, 1=Lunes -> 0, 2=Martes -> 1, etc.
+              const todayIndex = today === 0 ? 6 : today - 1;
+              const isToday = todayIndex === dayIndex;
               
               return (
                 <div 

@@ -75,7 +75,7 @@ export default function MapView({
     <div className={`relative w-full ${className}`}>
       <div 
         ref={mapContainerRef} 
-        className="w-full h-full min-h-[400px] rounded-lg border shadow-sm"
+        className="w-full h-full min-h-[400px] rounded-lg border shadow-sm z-0"
         style={{ height: '100%' }}
       />
     </div>

@@ -33,7 +33,7 @@ export default function RegisterPage() {
             Crear Cuenta
           </h1>
           <p className="mt-2 text-gray-600">
-            Únete a la comunidad Buyloop
+            Únete a la comunidad Tienduki
           </p>
         </div>
         

@@ -34,7 +34,7 @@ export function Navbar() {
               <div className="bg-blue-600 p-2 rounded-lg">
                 <MapPin className="h-6 w-6 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900">Buyloop</span>
+              <span className="text-xl font-bold text-gray-900">Tienduki</span>
             </Link>
           </div>
 

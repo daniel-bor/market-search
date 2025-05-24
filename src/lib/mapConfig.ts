@@ -1,9 +1,9 @@
 // Configuración básica para Leaflet
 export const MAP_CONFIG = {
-  // Coordenadas por defecto (Madrid, España)
-  defaultCenter: [40.4168, -3.7038] as [number, number],
-  defaultZoom: 13,
-  minZoom: 10,
+  // Coordenadas por defecto (San Juan Sacatepéquez, Guatemala)
+  defaultCenter: [14.7174, -90.6413] as [number, number],
+  defaultZoom: 14,
+  minZoom: 11,
   maxZoom: 18,
   
   // Configuración del tile layer
