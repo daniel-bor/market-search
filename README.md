@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Buyloop Web MVP
 
-## Getting Started
+**Prototipo de plataforma de descubrimiento de negocios locales**
 
-First, run the development server:
+## 🚀 Tecnologías
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 15.1.8** - Framework React con App Router
+- **TypeScript** - Tipado estático
+- **TailwindCSS** - Framework CSS utilitario
+- **Leaflet** - Mapas interactivos
+- **shadcn/ui** - Componentes UI
+
+## 📁 Estructura del Proyecto
+
+```
+/
+├─ public/
+│   └─ assets/                 # Imágenes estáticas, mock-data JSON
+├─ src/
+│   ├─ app/
+│   │   ├─ layout.tsx          # Layout global
+│   │   ├─ page.tsx            # Página principal (mapa y buscador)
+│   │   └─ globals.css         # Estilos globales de Tailwind
+│   ├─ components/             # Componentes reutilizables
+│   │   ├─ MapView/            # Mapa interactivo
+│   │   ├─ SearchBar/          # Buscador con filtros
+│   │   ├─ BusinessCard/       # Tarjeta de negocio
+│   │   ├─ BusinessProfile/    # Vista detalle de negocio
+│   │   ├─ AuthForm/           # Formulario login/registro
+│   │   └─ Navbar/             # Barra de navegación
+│   ├─ contexts/               # React Context para auth y datos
+│   ├─ hooks/                  # Custom Hooks
+│   └─ lib/                    # Utilidades (localStorage, helpers)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏃‍♂️ Desarrollo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Comandos disponibles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Instalar dependencias
+npm install
 
-## Learn More
+# Servidor de desarrollo
+npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+# Construir para producción
+npm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Ejecutar en producción
+npm start
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Linting
+npm run lint
+```
 
-## Deploy on Vercel
+### Acceso local
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Desarrollo**: http://localhost:3000
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📋 Estado del Desarrollo
+
+### ✅ Fase 1: Configuración Base del Proyecto
+- [x] **Tarea 1.1**: Inicializar proyecto Next.js ✅
+- [ ] **Tarea 1.2**: Configurar TailwindCSS
+- [ ] **Tarea 1.3**: Configurar shadcn/ui
+
+### 📦 Próximas Fases
+- **Fase 2**: Estructura Base y Utilidades
+- **Fase 3**: Layout y Navegación
+- **Fase 4**: Autenticación
+- **Fase 5**: Página Principal y Mapa
+- **Fase 6**: Búsqueda y Filtros
+- **Fase 7**: Tarjetas y Lista de Negocios
+- **Fase 8**: Perfil Detallado de Negocio
+- **Fase 9**: Panel de Métricas
+- **Fase 10**: Pulido y Optimización
+
+## 🎯 Características del MVP
+
+- ✅ Proyecto Next.js con TypeScript configurado
+- ⏳ Autenticación simulada (login/registro)
+- ⏳ Mapa interactivo con marcadores de negocios
+- ⏳ Buscador con filtros por categoría y distancia
+- ⏳ Perfiles detallados de negocios
+- ⏳ Gestión de datos en localStorage
+- ⏳ Panel de métricas básico
+
+## 📝 Notas de Desarrollo
+
+- **Datos Mock**: Todos los datos son simulados y se almacenan en localStorage
+- **Autenticación**: Sistema completamente simulado sin validación real
+- **Mapa**: Usar coordenadas ficticias para los negocios
+- **Responsive**: Diseño mobile-first
+
+---
+
+**Última actualización**: 23 de mayo de 2025
+**Estado**: Tarea 1.1 completada ✅
