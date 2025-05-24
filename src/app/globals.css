@@ -113,43 +113,59 @@ body {
   background-image: url('https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png');
 }
 
-/* Estilos para marcadores personalizados */
+/* Estilos personalizados para marcadores del mapa */
 .custom-marker {
-  background-color: #3B82F6;
-  border: 2px solid #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: none !important;
+  background: transparent !important;
 }
 
-.custom-marker.selected {
-  background-color: #EF4444;
-  transform: scale(1.2);
-}
-
-/* Estilos para popups del mapa */
 .custom-popup .leaflet-popup-content-wrapper {
-  background: white;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  padding: 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .custom-popup .leaflet-popup-content {
-  margin: 0;
-  font-family: Inter, system-ui, -apple-system, sans-serif;
+  margin: 0 !important;
+  line-height: 1.5;
 }
 
 .custom-popup .leaflet-popup-tip {
   background: white;
+  border: 1px solid #e5e7eb;
 }
 
-/* Hacer el mapa responsive */
-.leaflet-container {
-  font-family: Inter, system-ui, -apple-system, sans-serif;
+/* Animación suave para los marcadores */
+.custom-marker {
+  transition: transform 0.2s ease-in-out;
 }
 
-/* Estilos para controles del mapa en móvil */
+.custom-marker:hover {
+  transform: scale(1.1);
+  z-index: 1000;
+}
+
+/* Animaciones para marcadores destacados */
+@keyframes pulse-featured {
+  0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+.featured-marker {
+  animation: pulse-featured 2s infinite;
+}
+
+/* Responsive para popups en móvil */
 @media (max-width: 768px) {
+  .custom-popup .leaflet-popup-content-wrapper {
+    max-width: 280px !important;
+    font-size: 13px;
+  }
+  
+  .custom-popup .leaflet-popup-content {
+    padding: 8px;
+  }
+  
   .leaflet-control-zoom {
     margin-left: 10px !important;
     margin-top: 10px !important;

@@ -1,3 +1,4 @@
+// filepath: /home/danielbor/Documentos/Universidad/Emprendedores/buyloop-web-mvp/src/components/MapView/MapView.tsx
 'use client';
 
 import { useEffect, useRef } from 'react';

@@ -47,7 +47,7 @@ export function DataProvider({ children }: DataProviderProps) {
   });
 
   // Función para cargar datos mock
-  const initMockData = async () => {
+  const initMockData = React.useCallback(async () => {
     try {
       // Verificar si ya hay datos en localStorage
       const existingBusinesses = getFromStorage<Business[]>(STORAGE_KEYS.BUSINESSES);
@@ -81,10 +81,10 @@ export function DataProvider({ children }: DataProviderProps) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Filtrar negocios basado en los filtros actuales
-  const applyFilters = React.useCallback(() => {
+  useEffect(() => {
     let filtered = [...businesses];
 
     // Filtro por categoría
@@ -173,13 +173,7 @@ export function DataProvider({ children }: DataProviderProps) {
   // Efectos
   useEffect(() => {
     initMockData();
-  }, []);
-
-  useEffect(() => {
-    if (businesses.length > 0) {
-      applyFilters();
-    }
-  }, [applyFilters, businesses]);
+  }, [initMockData]);
 
   const value: DataContextType = {
     businesses,
