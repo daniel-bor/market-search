@@ -1,7 +1,10 @@
 'use client';
 
+import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { SearchBar, SearchFilters } from "@/components/SearchBar";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { BusinessCard } from "@/components/BusinessCard";
 import { useData } from "@/contexts";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
@@ -23,9 +26,10 @@ const MapView = dynamic(() => import("@/components/MapView/MapView"), {
 export default function Home() {
   const { 
     filteredBusinesses, 
+    filters, 
     setFilters, 
     loading, 
-    initMockData
+    initMockData 
   } = useData();
   const router = useRouter();
 
@@ -38,13 +42,12 @@ export default function Home() {
     router.push(`/business/${businessId}`);
   };
 
-  const handleSearchFilters = (searchFilters: SearchFilters) => {
-    // Mapear los filtros del SearchBar a los filtros del DataContext
-    setFilters({
-      searchText: searchFilters.searchText,
-      category: searchFilters.category === 'Todas' ? '' : searchFilters.category,
-      distance: searchFilters.distance
-    });
+  const handleCategoryChange = (value: string) => {
+    setFilters({ category: value === 'all' ? '' : value });
+  };
+
+  const handleSearchChange = (value: string) => {
+    setFilters({ searchText: value });
   };
 
   if (loading) {
@@ -72,8 +75,39 @@ export default function Home() {
         </div>
 
         {/* Búsqueda y filtros */}
-        <div className="mb-8">
-          <SearchBar onSearch={handleSearchFilters} />
+        <div className="max-w-2xl mx-auto mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Buscar Negocios</CardTitle>
+              <CardDescription>
+                Encuentra el lugar perfecto para lo que necesitas
+              </CardDescription>
+            </CardHeader>
+            <div className="p-6 space-y-4">
+              <div className="flex space-x-2">
+                <Input 
+                  placeholder="Buscar negocios..." 
+                  value={filters.searchText}
+                  onChange={(e) => handleSearchChange(e.target.value)}
+                  className="flex-1"
+                />
+                <Button>Buscar</Button>
+              </div>
+              <Select value={filters.category || 'all'} onValueChange={handleCategoryChange}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecciona una categoría" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todas las categorías</SelectItem>
+                  <SelectItem value="Café/Restaurante">Cafés y Restaurantes</SelectItem>
+                  <SelectItem value="Librería">Librerías</SelectItem>
+                  <SelectItem value="Farmacia">Farmacias</SelectItem>
+                  <SelectItem value="Supermercado">Supermercados</SelectItem>
+                  <SelectItem value="Tienda de Ropa">Tiendas de Ropa</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </Card>
         </div>
 
         {/* Mapa principal */}
@@ -96,16 +130,46 @@ export default function Home() {
           </Card>
         </div>
 
+        {/* Lista de negocios - Demostración de BusinessCard */}
+        <div className="mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Lista de Negocios</CardTitle>
+              <CardDescription>
+                Vista en tarjetas de los negocios encontrados
+              </CardDescription>
+            </CardHeader>
+            <div className="p-6">
+              {filteredBusinesses.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredBusinesses.slice(0, 6).map((business) => (
+                    <BusinessCard
+                      key={business.id}
+                      business={business}
+                      showDistance={true}
+                      distance={Math.random() * 5 + 0.5} // Distancia simulada entre 0.5km y 5.5km
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-gray-500">No se encontraron negocios con los filtros actuales.</p>
+                </div>
+              )}
+            </div>
+          </Card>
+        </div>
+
         {/* Estado del desarrollo */}
         <div className="text-center space-y-2">
           <div className="inline-block bg-green-500 text-white px-4 py-2 rounded-lg mr-2">
-            ✅ Tarea 6.1 Completada
+            ✅ Tarea 7.1 Completada
           </div>
           <div className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg mr-2">
-            ✅ SearchBar Funcional
+            ✅ BusinessCard Funcional
           </div>
           <div className="inline-block bg-purple-500 text-white px-4 py-2 rounded-lg">
-            ✅ Filtros Avanzados
+            ✅ Vista de Lista
           </div>
         </div>
       </div>
