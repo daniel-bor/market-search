@@ -4,12 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { BusinessCard } from "@/components/BusinessCard";
 import { useData } from "@/contexts";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Map, List } from "lucide-react";
+import { useEffect } from "react";
 
 // Importar MapView dinámicamente para evitar problemas de SSR
 const MapView = dynamic(() => import("@/components/MapView/MapView"), { 
@@ -33,7 +31,6 @@ export default function Home() {
     initMockData 
   } = useData();
   const router = useRouter();
-  const [viewMode, setViewMode] = useState<'map' | 'list'>('map');
 
   // Inicializar datos mock si no están cargados
   useEffect(() => {
@@ -112,73 +109,22 @@ export default function Home() {
           </Card>
         </div>
 
-        {/* Toggle de vista y resultados */}
+        {/* Mapa principal */}
         <div className="mb-8">
           <Card>
-            <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-              <div>
-                <CardTitle>Negocios Encontrados</CardTitle>
-                <CardDescription>
-                  {filteredBusinesses.length} negocio{filteredBusinesses.length !== 1 ? 's' : ''} encontrado{filteredBusinesses.length !== 1 ? 's' : ''}
-                </CardDescription>
-              </div>
-              <div className="flex space-x-2">
-                <Button
-                  variant={viewMode === 'map' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setViewMode('map')}
-                  className="flex items-center space-x-1"
-                >
-                  <Map className="h-4 w-4" />
-                  <span>Mapa</span>
-                </Button>
-                <Button
-                  variant={viewMode === 'list' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setViewMode('list')}
-                  className="flex items-center space-x-1"
-                >
-                  <List className="h-4 w-4" />
-                  <span>Lista</span>
-                </Button>
-              </div>
+            <CardHeader>
+              <CardTitle>Mapa de Negocios</CardTitle>
+              <CardDescription>
+                {filteredBusinesses.length} negocio{filteredBusinesses.length !== 1 ? 's' : ''} encontrado{filteredBusinesses.length !== 1 ? 's' : ''}
+              </CardDescription>
             </CardHeader>
             <div className="p-6">
-              {viewMode === 'map' ? (
-                <div className="h-96 w-full">
-                  <MapView 
-                    businesses={filteredBusinesses}
-                    onBusinessClick={handleBusinessClick}
-                  />
-                </div>
-              ) : (
-                <div>
-                  {filteredBusinesses.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {filteredBusinesses.map((business) => (
-                        <BusinessCard
-                          key={business.id}
-                          business={business}
-                          showDistance={true}
-                          distance={Math.random() * 5 + 0.5} // Distancia simulada entre 0.5km y 5.5km
-                        />
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-12">
-                      <div className="text-gray-400 mb-4">
-                        <List className="h-16 w-16 mx-auto" />
-                      </div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-2">
-                        No se encontraron negocios
-                      </h3>
-                      <p className="text-gray-500">
-                        Intenta ajustar tus filtros de búsqueda
-                      </p>
-                    </div>
-                  )}
-                </div>
-              )}
+              <div className="h-96 w-full">
+                <MapView 
+                  businesses={filteredBusinesses}
+                  onBusinessClick={handleBusinessClick}
+                />
+              </div>
             </div>
           </Card>
         </div>
@@ -186,16 +132,13 @@ export default function Home() {
         {/* Estado del desarrollo */}
         <div className="text-center space-y-2">
           <div className="inline-block bg-green-500 text-white px-4 py-2 rounded-lg mr-2">
-            ✅ Tarea 7.1 Completada
-          </div>
-          <div className="inline-block bg-green-500 text-white px-4 py-2 rounded-lg mr-2">
-            ✅ Tarea 7.2 Completada
+            ✅ Tarea 5.3 Completada
           </div>
           <div className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg mr-2">
-            ✅ Toggle Mapa/Lista
+            ✅ MapMarker Funcional
           </div>
           <div className="inline-block bg-purple-500 text-white px-4 py-2 rounded-lg">
-            ✅ Vista de Lista Sincronizada
+            ✅ Marcadores Personalizados
           </div>
         </div>
       </div>
