@@ -1,3 +1,8 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -11,68 +16,96 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Prueba de componentes de TailwindCSS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="card">
-            <h3 className="text-xl font-semibold mb-2 text-primary-600">
-              Mapa Interactivo
-            </h3>
-            <p className="text-gray-600">
-              Explora negocios cercanos en un mapa interactivo con marcadores personalizados.
-            </p>
-          </div>
-
-          <div className="card">
-            <h3 className="text-xl font-semibold mb-2 text-primary-600">
-              Búsqueda Avanzada
-            </h3>
-            <p className="text-gray-600">
-              Filtra por categoría, distancia y encuentra exactamente lo que buscas.
-            </p>
-          </div>
-
-          <div className="card">
-            <h3 className="text-xl font-semibold mb-2 text-primary-600">
-              Perfiles Detallados
-            </h3>
-            <p className="text-gray-600">
-              Información completa de cada negocio con horarios y contacto directo.
-            </p>
-          </div>
-        </div>
-
-        {/* Prueba de botones */}
-        <div className="text-center space-x-4">
-          <button className="btn-primary">
-            Explorar Mapa
-          </button>
-          <button className="btn-secondary">
-            Iniciar Sesión
-          </button>
-        </div>
-
-        {/* Prueba de formulario */}
-        <div className="max-w-md mx-auto mt-8 card">
-          <h3 className="text-lg font-semibold mb-4">Prueba de Formulario</h3>
-          <div className="space-y-4">
-            <input 
-              type="text" 
+        {/* Prueba básica de búsqueda con shadcn/ui */}
+        <div className="max-w-md mx-auto mb-8">
+          <div className="flex space-x-2">
+            <Input 
               placeholder="Buscar negocios..." 
-              className="input-field"
+              className="flex-1"
             />
-            <select className="input-field">
-              <option>Todas las categorías</option>
-              <option>Restaurantes</option>
-              <option>Tiendas</option>
-              <option>Servicios</option>
-            </select>
+            <Button>Buscar</Button>
           </div>
         </div>
 
-        {/* Estado de TailwindCSS */}
-        <div className="mt-8 text-center">
-          <div className="inline-block bg-success text-white px-4 py-2 rounded-lg">
-            ✅ TailwindCSS configurado correctamente
+        {/* Prueba de componentes de shadcn/ui */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Mapa Interactivo</CardTitle>
+              <CardDescription>
+                Explora negocios cercanos en un mapa interactivo con marcadores personalizados.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Búsqueda Avanzada</CardTitle>
+              <CardDescription>
+                Filtra por categoría, distancia y encuentra exactamente lo que buscas.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Perfiles Detallados</CardTitle>
+              <CardDescription>
+                Información completa de cada negocio con horarios y contacto directo.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+
+        {/* Prueba de botones de shadcn/ui */}
+        <div className="text-center space-x-4">
+          <Button size="lg">
+            Explorar Mapa
+          </Button>
+          <Button variant="outline" size="lg">
+            Iniciar Sesión
+          </Button>
+        </div>
+
+        {/* Prueba de formulario con shadcn/ui */}
+        <div className="max-w-md mx-auto mt-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Formulario con shadcn/ui</CardTitle>
+              <CardDescription>
+                Ejemplo de formulario usando componentes de shadcn/ui
+              </CardDescription>
+            </CardHeader>
+            <div className="p-6 space-y-4">
+              <Input 
+                type="text" 
+                placeholder="Buscar negocios..." 
+              />
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecciona una categoría" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todas las categorías</SelectItem>
+                  <SelectItem value="restaurants">Restaurantes</SelectItem>
+                  <SelectItem value="stores">Tiendas</SelectItem>
+                  <SelectItem value="services">Servicios</SelectItem>
+                </SelectContent>
+              </Select>
+              <Button className="w-full">
+                Buscar Negocios
+              </Button>
+            </div>
+          </Card>
+        </div>
+
+        {/* Estado de la configuración */}
+        <div className="mt-8 text-center space-y-2">
+          <div className="inline-block bg-green-500 text-white px-4 py-2 rounded-lg mr-2">
+            ✅ TailwindCSS configurado
+          </div>
+          <div className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg">
+            ✅ shadcn/ui configurado
           </div>
         </div>
       </div>
