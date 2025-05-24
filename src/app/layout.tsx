@@ -15,10 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Buyloop - Encuentra negocios locales",
+  title: "Tienduki - Encuentra negocios locales",
   description: "Plataforma para descubrir y conectar con negocios locales en tu área",
   keywords: "negocios locales, mapa, búsqueda, comercios",
-  authors: [{ name: "Buyloop Team" }],
+  authors: [{ name: "TND Team" }],
 };
 
 export const viewport: Viewport = {

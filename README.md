@@ -1,4 +1,4 @@
-# Buyloop Web MVP
+# Tienduki Web MVP
 
 **Prototipo de plataforma de descubrimiento de negocios locales**
 

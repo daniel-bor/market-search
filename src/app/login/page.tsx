@@ -37,7 +37,7 @@ export default function LoginPage() {
             Iniciar Sesión
           </h1>
           <p className="mt-2 text-gray-600">
-            Accede a tu cuenta de Buyloop
+            Accede a tu cuenta de Tienduki
           </p>
         </div>
         
