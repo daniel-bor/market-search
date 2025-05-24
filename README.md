@@ -58,42 +58,84 @@ npm run lint
 
 - **Desarrollo**: http://localhost:3000
 
+### Credenciales de prueba
+
+Para probar la autenticación, puedes usar estas credenciales de demostración:
+
+```
+Email: demo@buyloop.com
+Contraseña: demo123
+
+Email: admin@buyloop.com  
+Contraseña: admin123
+```
+
+O puedes registrar una nueva cuenta desde la página de registro.
+
 ## 📋 Estado del Desarrollo
 
-### ✅ Fase 1: Configuración Base del Proyecto
-- [x] **Tarea 1.1**: Inicializar proyecto Next.js ✅
-- [ ] **Tarea 1.2**: Configurar TailwindCSS
-- [ ] **Tarea 1.3**: Configurar shadcn/ui
+✅ **MVP Funcional** - Todas las funcionalidades principales implementadas
 
-### 📦 Próximas Fases
-- **Fase 2**: Estructura Base y Utilidades
-- **Fase 3**: Layout y Navegación
-- **Fase 4**: Autenticación
-- **Fase 5**: Página Principal y Mapa
-- **Fase 6**: Búsqueda y Filtros
-- **Fase 7**: Tarjetas y Lista de Negocios
-- **Fase 8**: Perfil Detallado de Negocio
-- **Fase 9**: Panel de Métricas
-- **Fase 10**: Pulido y Optimización
+### 🔄 En desarrollo:
+- Panel de métricas y estadísticas
+- Funcionalidades de contacto avanzadas
 
-## 🎯 Características del MVP
+## 🎯 Funcionalidades Principales
 
-- ✅ Proyecto Next.js con TypeScript configurado
-- ⏳ Autenticación simulada (login/registro)
-- ⏳ Mapa interactivo con marcadores de negocios
-- ⏳ Buscador con filtros por categoría y distancia
-- ⏳ Perfiles detallados de negocios
-- ⏳ Gestión de datos en localStorage
-- ⏳ Panel de métricas básico
+### 🔐 Autenticación
+- Sistema de registro e inicio de sesión
+- Sesiones persistentes con localStorage
+- Protección de rutas y middleware de seguridad
+- Usuarios de demostración precargados
 
-## 📝 Notas de Desarrollo
+### 🗺️ Exploración de Negocios
+- **Mapa interactivo** con marcadores personalizados por categoría
+- **Vista de lista** alternativa con tarjetas informativas
+- **Toggle fácil** entre vista de mapa y lista
+- Marcadores destacados con animaciones
 
-- **Datos Mock**: Todos los datos son simulados y se almacenan en localStorage
-- **Autenticación**: Sistema completamente simulado sin validación real
-- **Mapa**: Usar coordenadas ficticias para los negocios
-- **Responsive**: Diseño mobile-first
+### 🔍 Búsqueda Avanzada
+- **Búsqueda por texto** en tiempo real
+- **Filtros por categoría** (Café, Restaurante, Librería, etc.)
+- **Filtro por distancia** con slider interactivo
+- Resultados actualizados automáticamente
+
+### 📱 Perfiles de Negocio
+- **Páginas detalladas** para cada negocio
+- Información completa: horarios, contacto, ubicación
+- **Galería de imágenes** con carrusel
+- Botones de contacto directo (llamada y mensaje)
+- Calificaciones y reseñas
+
+### 🎨 Interfaz de Usuario
+- **Diseño responsive** mobile-first
+- **Componentes UI modernos** con shadcn/ui
+- **Navegación intuitiva** con menú móvil
+- **Animaciones suaves** y transiciones
+
+## 📝 Notas Técnicas
+
+### 🔧 Stack Tecnológico
+- **Next.js 15.1.8** con App Router y TypeScript
+- **TailwindCSS** para estilos responsive
+- **shadcn/ui** componentes UI modernos
+- **Leaflet** para mapas interactivos
+- **React Hook Form** para formularios
+- **Context API** para gestión de estado
+
+### 💾 Almacenamiento
+- **localStorage** para persistencia de datos
+- **Datos mock** precargados automáticamente  
+- **Usuarios demo** para testing
+- **Sesiones simuladas** con tokens
+
+### 🗺️ Configuración del Mapa
+- Centrado en **Bogotá, Colombia**
+- **Marcadores personalizados** por categoría
+- **Popups informativos** con datos del negocio
+- **Responsive** para móvil y desktop
 
 ---
 
-**Última actualización**: 23 de mayo de 2025
-**Estado**: Tarea 1.1 completada ✅
+**Última actualización**: 23 de mayo de 2025  
+**Estado**: ✅ MVP funcional completo
