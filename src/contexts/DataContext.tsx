@@ -25,6 +25,7 @@ interface DataContextType {
   getAvailableCategories: () => string[];
   selectBusiness: (id: string) => void;
   getBusinessById: (id: string) => Business | undefined;
+  addBusiness: (business: Omit<Business, 'id'>) => Promise<void>;
   addVisit: (businessId: string) => void;
   getVisits: (businessId: string) => number;
   sendMessage: (businessId: string, message: string) => void;
@@ -183,6 +184,49 @@ export function DataProvider({ children }: DataProviderProps) {
     return businesses.find(b => b.id === id);
   };
 
+  // Añadir un nuevo negocio
+  const addBusiness = async (businessData: Omit<Business, 'id'>): Promise<void> => {
+    try {
+      // Generar ID único
+      const existingBusinesses = getFromStorage<Business[]>(STORAGE_KEYS.BUSINESSES) || [];
+      console.log('Comercios existentes:', existingBusinesses.length);
+      
+      const maxId = existingBusinesses.reduce((max, business) => 
+        Math.max(max, parseInt(business.id) || 0), 0
+      );
+      const newId = (maxId + 1).toString();
+
+      const newBusiness: Business = {
+        ...businessData,
+        id: newId
+      };
+
+      console.log('Nuevo comercio a añadir:', newBusiness);
+
+      // Añadir a la lista existente
+      const updatedBusinesses = [...existingBusinesses, newBusiness];
+      
+      // Guardar en localStorage
+      saveToStorage(STORAGE_KEYS.BUSINESSES, updatedBusinesses);
+      console.log('Comercios guardados en localStorage:', updatedBusinesses.length);
+      
+      // Actualizar estado local
+      setBusinesses(updatedBusinesses);
+      console.log('Estado actualizado con', updatedBusinesses.length, 'comercios');
+      
+      // Limpiar filtros para mostrar todos los comercios incluyendo el nuevo
+      setFiltersState({
+        category: '',
+        distance: 50,
+        searchText: ''
+      });
+      
+    } catch (error) {
+      console.error('Error al añadir negocio:', error);
+      throw error;
+    }
+  };
+
   // Añadir visita a un negocio
   const addVisit = (businessId: string) => {
     const visits = getFromStorage<Record<string, number>>(STORAGE_KEYS.VISITS) || {};
@@ -236,6 +280,7 @@ export function DataProvider({ children }: DataProviderProps) {
     getAvailableCategories,
     selectBusiness,
     getBusinessById,
+    addBusiness,
     addVisit,
     getVisits,
     sendMessage,
