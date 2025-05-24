@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Leaflet CSS */
+@import 'leaflet/dist/leaflet.css';
+
 body {
   font-family: Inter, system-ui, -apple-system, sans-serif;
   line-height: 1.6;
@@ -97,4 +100,28 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Estilos específicos para Leaflet */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Fix para iconos de Leaflet */
+.leaflet-default-icon-path {
+  background-image: url('https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png');
+}
+
+/* Estilos para marcadores personalizados */
+.custom-marker {
+  background-color: #3B82F6;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.custom-marker.selected {
+  background-color: #EF4444;
+  transform: scale(1.2);
 }

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { MapView } from "@/components/MapView";
 
 export default function Home() {
   return (
@@ -99,13 +100,33 @@ export default function Home() {
           </Card>
         </div>
 
+        {/* Mapa de prueba */}
+        <div className="mt-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Mapa Interactivo</CardTitle>
+              <CardDescription>
+                Prueba del componente de mapa con Leaflet
+              </CardDescription>
+            </CardHeader>
+            <div className="p-6">
+              <div className="h-96 w-full">
+                <MapView />
+              </div>
+            </div>
+          </Card>
+        </div>
+
         {/* Estado de la configuración */}
         <div className="mt-8 text-center space-y-2">
           <div className="inline-block bg-green-500 text-white px-4 py-2 rounded-lg mr-2">
             ✅ TailwindCSS configurado
           </div>
-          <div className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg">
+          <div className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg mr-2">
             ✅ shadcn/ui configurado
+          </div>
+          <div className="inline-block bg-purple-500 text-white px-4 py-2 rounded-lg">
+            ✅ Leaflet configurado
           </div>
         </div>
       </div>
