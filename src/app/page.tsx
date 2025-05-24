@@ -2,9 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BusinessCard } from "@/components/BusinessCard";
+import SearchBar, { SearchFilters } from "@/components/SearchBar/SearchBar";
 import { useData } from "@/contexts";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
@@ -27,7 +26,6 @@ const MapView = dynamic(() => import("@/components/MapView/MapView"), {
 export default function Home() {
   const { 
     filteredBusinesses, 
-    filters, 
     setFilters, 
     loading
   } = useData();
@@ -38,12 +36,12 @@ export default function Home() {
     router.push(`/business/${businessId}`);
   };
 
-  const handleCategoryChange = (value: string) => {
-    setFilters({ category: value === 'all' ? '' : value });
-  };
-
-  const handleSearchChange = (value: string) => {
-    setFilters({ searchText: value });
+  const handleSearchFilters = (searchFilters: SearchFilters) => {
+    setFilters({
+      searchText: searchFilters.searchText,
+      category: searchFilters.category === 'Todas' ? '' : searchFilters.category,
+      distance: searchFilters.distance
+    });
   };
 
   if (loading) {
@@ -71,39 +69,8 @@ export default function Home() {
         </div>
 
         {/* Búsqueda y filtros */}
-        <div className="max-w-2xl mx-auto mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Buscar Negocios</CardTitle>
-              <CardDescription>
-                Encuentra el lugar perfecto para lo que necesitas
-              </CardDescription>
-            </CardHeader>
-            <div className="p-6 space-y-4">
-              <div className="flex space-x-2">
-                <Input 
-                  placeholder="Buscar negocios..." 
-                  value={filters.searchText}
-                  onChange={(e) => handleSearchChange(e.target.value)}
-                  className="flex-1"
-                />
-                <Button>Buscar</Button>
-              </div>
-              <Select value={filters.category || 'all'} onValueChange={handleCategoryChange}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecciona una categoría" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todas las categorías</SelectItem>
-                  <SelectItem value="Café/Restaurante">Cafés y Restaurantes</SelectItem>
-                  <SelectItem value="Librería">Librerías</SelectItem>
-                  <SelectItem value="Farmacia">Farmacias</SelectItem>
-                  <SelectItem value="Supermercado">Supermercados</SelectItem>
-                  <SelectItem value="Tienda de Ropa">Tiendas de Ropa</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </Card>
+        <div className="max-w-4xl mx-auto mb-8">
+          <SearchBar onSearch={handleSearchFilters} />
         </div>
 
         {/* Toggle de vista y resultados */}
